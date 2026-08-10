@@ -1,0 +1,562 @@
+/* CSS Reset & Variable Design System */
+:root {
+    --bg-dark: #0a0a0f;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 215, 0, 0.15);
+    --card-hover-border: rgba(255, 215, 0, 0.5);
+    --gold-accent: #f39c12;
+    --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    --gold-glow: rgba(246, 211, 101, 0.3);
+    --rose-glow: rgba(255, 107, 129, 0.4);
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b0;
+    --text-gold: #ffd700;
+    --font-heading: 'Dancing Script', cursive;
+    --font-serif: 'Noto Serif KR', serif;
+    --font-sans: 'Pretendard', sans-serif;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Stars Animation */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.2); }
+}
+
+/* App Main Container (Mobile First, Max Desktop Boundary) */
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    padding: 24px 18px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+}
+
+.header .subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--text-gold);
+    letter-spacing: 1px;
+}
+
+.header .title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 6px 0;
+    background: linear-gradient(120deg, #ffffff, #ffeaa7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header .description {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* 5x5 Grid Layout */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+/* Calendar Card Door */
+.door {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    perspective: 1000px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+}
+
+.door:hover {
+    transform: translateY(-3px);
+    border-color: var(--card-hover-border);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+}
+
+.door-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Day Number */
+.door-number {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.door-icon {
+    font-size: 0.85rem;
+    margin-top: 2px;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+/* Door States: Locked, Available, Opened */
+.door.locked {
+    background: rgba(15, 15, 25, 0.6);
+    border-color: rgba(255, 255, 255, 0.05);
+    opacity: 0.7;
+}
+
+.door.locked .door-number {
+    color: #666677;
+    text-shadow: none;
+}
+
+.door.available {
+    border-color: rgba(246, 211, 101, 0.6);
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(246, 211, 101, 0.2); }
+    50% { box-shadow: 0 0 18px rgba(246, 211, 101, 0.5); }
+}
+
+.door.opened {
+    background: linear-gradient(135deg, rgba(255, 107, 129, 0.15), rgba(246, 211, 101, 0.15));
+    border-color: rgba(255, 107, 129, 0.4);
+}
+
+.door.opened .door-number {
+    color: #ff8fa3;
+}
+
+/* Footer Section */
+.footer {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.romantic-quote {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.test-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--text-gold);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.btn-subtle {
+    background: none;
+    border: none;
+    color: #8888a0;
+    font-size: 0.75rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.btn-subtle:hover {
+    color: var(--text-primary);
+}
+
+/* Modal Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: linear-gradient(145deg, #161622, #0d0d14);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    padding: 28px;
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.modal-body {
+    overflow-y: auto;
+    padding-right: 4px;
+    max-height: 50vh;
+}
+
+/* Custom romantic scrollbar */
+.modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #777;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-day-badge {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--text-gold);
+}
+
+.modal-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.modal-heart {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.modal-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.modal-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d0d0e0;
+    margin-bottom: 24px;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+.btn-primary {
+    background: var(--gold-gradient);
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    color: #000;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(246, 211, 101, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(246, 211, 101, 0.6);
+}
+
+/* Toast Message */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(255, 107, 129, 0.4);
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 200;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    color: #fff;
+    pointer-events: none;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (min-width: 600px) {
+    .app-container {
+        padding: 40px 20px;
+    }
+    .header .title {
+        font-size: 2.2rem;
+    }
+    .calendar-grid {
+        gap: 16px;
+    }
+}
+
+/* Password Lock Overlay */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0a0a0f;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.password-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.password-card {
+    background: linear-gradient(145deg, #161622, #0d0d14);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 24px;
+    padding: 36px 28px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+.password-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.password-card h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-gold);
+    margin-bottom: 6px;
+}
+
+.password-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.password-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.password-card input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.password-card input:focus {
+    border-color: var(--gold-accent);
+}
+
+.password-error {
+    color: #ff6b81 !important;
+    font-size: 0.8rem !important;
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    display: none;
+}
+
+.password-error.show {
+    display: block;
+}
+
+/* Admin Styles */
+.hidden {
+    display: none !important;
+}
+
+.romantic-quote {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+}
+
+.romantic-quote:hover {
+    color: var(--text-gold);
+}
+
+.admin-indicator {
+    font-size: 0.75rem;
+    color: #a8ff78;
+    background: rgba(168, 255, 120, 0.1);
+    border: 1px solid rgba(168, 255, 120, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 6px;
+}
+
+.edit-label {
+    display: block;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-gold);
+    margin-bottom: 6px;
+}
+
+.edit-input, .edit-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    margin-bottom: 14px;
+    transition: border-color 0.3s;
+}
+
+.edit-input:focus, .edit-textarea:focus {
+    border-color: var(--gold-accent);
+}
+

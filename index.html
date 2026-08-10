@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our 300 Days - Advent Calendar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Noto+Serif+KR:wght@300;400;600&family=Pretendard:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Sparkles Container -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <div class="app-container">
+        <!-- Calendar 5x5 Grid -->
+        <main class="calendar-grid" id="calendarGrid">
+            <!-- 25 Cards will be generated via JS -->
+        </main>
+
+        <!-- Footer Note -->
+        <footer class="footer">
+            <p class="romantic-quote" id="secretAdminTrigger" title="관리자 모드">"Every day with you is a gift."</p>
+            <div id="adminIndicator" class="admin-indicator hidden" title="클릭하여 관리자 로그아웃">⚙️ 관리자 모드 (클릭시 로그아웃)</div>
+        </footer>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="adminLoginModal">
+        <div class="password-card">
+            <div class="password-icon">👑</div>
+            <h2>Admin Mode</h2>
+            <p>관리자 비밀번호를 입력하면 글 수정이 가능합니다</p>
+            <form id="adminForm">
+                <input type="password" id="adminPasswordInput" placeholder="관리자 암호..." autocomplete="off" />
+                <button type="submit" class="btn-primary">관리자 로그인 🔓</button>
+            </form>
+            <p class="password-error" id="adminPasswordError">관리자 비밀번호가 틀렸습니다!</p>
+        </div>
+    </div>
+
+    <!-- Modal for Door Content & Admin Editing -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <span class="modal-day-badge" id="modalDayBadge">Day 1</span>
+                <span class="modal-date" id="modalDate">2026.08.10</span>
+            </div>
+            
+            <!-- View Mode Content -->
+            <div class="modal-body" id="modalViewContent">
+                <div class="modal-heart">💖</div>
+                <h3 class="modal-title" id="modalTitle">함께한 첫 번째 메시지</h3>
+                <p class="modal-text" id="modalText">
+                    이곳에 내용이 들어갑니다.
+                </p>
+            </div>
+
+            <!-- Admin Edit Mode Content -->
+            <div class="modal-body hidden" id="modalEditContent">
+                <label class="edit-label">제목 수정</label>
+                <input type="text" id="editTitleInput" class="edit-input" />
+                <label class="edit-label">내용 수정 (줄바꿈 가능)</label>
+                <textarea id="editTextarea" class="edit-textarea" rows="6"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary" id="modalConfirmBtn">마음에 간직하기 ✨</button>
+                <button class="btn-primary hidden" id="saveEditBtn" style="background: linear-gradient(135deg, #a8ff78, #78ffd6); color: #111;">글 저장하기 💾</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Locked Toast Warning -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">🔒</span>
+        <span class="toast-message" id="toastMessage">아직 열 수 없는 날짜예요! 지정된 날에 찾아와주세요.</span>
+    </div>
+
+    <!-- Supabase JS Client (v2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
