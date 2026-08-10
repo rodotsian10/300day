@@ -1,4 +1,3 @@
-// Interactive Logic & Config Engine (Supabase Database Sync)
 document.addEventListener('DOMContentLoaded', () => {
     const calendarGrid = document.getElementById('calendarGrid');
     const starsContainer = document.getElementById('starsContainer');
@@ -111,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Password Protection System
     function initPasswordProtection() {
+        if (!passwordOverlay) return;
         if (!CONFIG.SITE_PASSWORD || sessionStorage.getItem('300day_authenticated') === 'true') {
             passwordOverlay.classList.add('hidden');
         } else {
@@ -149,22 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Helper: SHA-256 Hash Function
-    async function hashString(str) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(str);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
     // Admin Password Form
-    adminForm.addEventListener('submit', async (e) => {
+    adminForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const inputPass = adminPasswordInput.value.trim();
-        const hashedInput = await hashString(inputPass);
 
-        if (hashedInput === CONFIG.ADMIN_PASSWORD_HASH) {
+        if (inputPass === CONFIG.ADMIN_PASSWORD) {
             isAdmin = true;
             adminLoginModal.classList.remove('active');
             adminIndicator.classList.remove('hidden');
@@ -343,8 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function startApp() {
         initPasswordProtection();
         initStars();
-        renderCalendar(); // Render immediately!
-        initSupabase();   // Async fetch will update content when ready
+        renderCalendar();
+        setTimeout(initSupabase, 10);
     }
 
     startApp();
