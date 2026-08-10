@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load messages from Supabase
     async function loadSupabaseMessages() {
-        if (!supabaseClient) return;
+        if (!supabaseClient) {
+            renderCalendar();
+            return;
+        }
         try {
             const { data, error } = await supabaseClient
                 .from('calendar_messages')
@@ -62,20 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) {
                 console.error('Supabase 데이터 로드 에러:', error);
-                return;
-            }
-
-            if (data && data.length > 0) {
+            } else if (data && data.length > 0) {
                 data.forEach(item => {
                     customMessages[item.day] = {
                         title: item.title,
                         text: item.text
                     };
                 });
-                renderCalendar();
             }
         } catch (err) {
             console.error('Supabase 로드 오류:', err);
+        } finally {
+            renderCalendar();
         }
     }
 
@@ -339,8 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
 
     // Initialize Everything
-    initPasswordProtection();
-    initStars();
-    initSupabase();
-    renderCalendar();
+    function startApp() {
+        initPasswordProtection();
+        initStars();
+        initSupabase();
+        renderCalendar();
+    }
+
+    startApp();
 });
