@@ -343,8 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function startApp() {
         initPasswordProtection();
         initStars();
-        initSupabase();
-        renderCalendar();
+        renderCalendar(); // Render immediately!
+        initSupabase();   // Async fetch will update content when ready
     }
 
     startApp();
