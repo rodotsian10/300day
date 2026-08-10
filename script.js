@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('passwordInput');
     const passwordError = document.getElementById('passwordError');
 
-    const TOTAL_DAYS = 25;
+    const TOTAL_DAYS = 31;
     let customMessages = {};
     let isAdmin = false;
     let currentEditingDay = null;

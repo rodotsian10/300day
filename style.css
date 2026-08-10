@@ -100,13 +100,12 @@ body {
     font-weight: 300;
 }
 
-/* 5x5 Grid Layout */
+/* 4-Columns Grid Layout */
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
     width: 100%;
-    aspect-ratio: 1;
 }
 
 /* Calendar Card Door */

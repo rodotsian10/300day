@@ -4,7 +4,8 @@
 
 const CONFIG = {
     // 1. 캘린더 시작 날짜 (YYYY-MM-DD)
-    START_DATE: "2026-07-27",
+    // 내일(2026-08-11)부터 Day 1이 시작되도록 설정되었습니다.
+    START_DATE: "2026-08-11",
 
     // 2. 전체 페이지 접속 비밀번호 (null로 설정 시 비번 없음)
     SITE_PASSWORD: null, 
@@ -18,32 +19,38 @@ const CONFIG = {
 };
 
 // ==========================================
-// 💌 [기본 메시지 데이터] (Supabase 연결 전 기본값)
+// 💌 [기본 메시지 데이터] (Day 1 ~ Day 31)
 // ==========================================
 const MESSAGES = {
-    1: { title: "D-24", text: "D-24" },
-    2: { title: "D-23", text: "D-23" },
-    3: { title: "D-22", text: "D-22" },
-    4: { title: "D-21", text: "D-21" },
-    5: { title: "D-20", text: "D-20" },
-    6: { title: "D-19", text: "D-19" },
-    7: { title: "D-18", text: "D-18" },
-    8: { title: "D-17", text: "D-17" },
-    9: { title: "D-16", text: "D-16" },
-    10: { title: "D-15", text: "D-15" },
-    11: { title: "D-14", text: "D-14" },
-    12: { title: "D-13", text: "D-13" },
-    13: { title: "D-12", text: "D-12" },
-    14: { title: "D-11", text: "D-11" },
-    15: { title: "D-10", text: "D-10" },
-    16: { title: "D-9", text: "D-9" },
-    17: { title: "D-8", text: "D-8" },
-    18: { title: "D-7", text: "D-7" },
-    19: { title: "D-6", text: "D-6" },
-    20: { title: "D-5", text: "D-5" },
-    21: { title: "D-4", text: "D-4" },
-    22: { title: "D-3", text: "D-3" },
-    23: { title: "D-2", text: "D-2" },
-    24: { title: "D-1", text: "D-1" },
-    25: { title: "D-Day 🎉", text: "D-Day 🎉 300일을 축하해!" }
+    1: { title: "Day 1", text: "Day 1" },
+    2: { title: "Day 2", text: "Day 2" },
+    3: { title: "Day 3", text: "Day 3" },
+    4: { title: "Day 4", text: "Day 4" },
+    5: { title: "Day 5", text: "Day 5" },
+    6: { title: "Day 6", text: "Day 6" },
+    7: { title: "Day 7", text: "Day 7" },
+    8: { title: "Day 8", text: "Day 8" },
+    9: { title: "Day 9", text: "Day 9" },
+    10: { title: "Day 10", text: "Day 10" },
+    11: { title: "Day 11", text: "Day 11" },
+    12: { title: "Day 12", text: "Day 12" },
+    13: { title: "Day 13", text: "Day 13" },
+    14: { title: "Day 14", text: "Day 14" },
+    15: { title: "Day 15", text: "Day 15" },
+    16: { title: "Day 16", text: "Day 16" },
+    17: { title: "Day 17", text: "Day 17" },
+    18: { title: "Day 18", text: "Day 18" },
+    19: { title: "Day 19", text: "Day 19" },
+    20: { title: "Day 20", text: "Day 20" },
+    21: { title: "Day 21", text: "Day 21" },
+    22: { title: "Day 22", text: "Day 22" },
+    23: { title: "Day 23", text: "Day 23" },
+    24: { title: "Day 24", text: "Day 24" },
+    25: { title: "Day 25", text: "Day 25" },
+    26: { title: "Day 26", text: "Day 26" },
+    27: { title: "Day 27", text: "Day 27" },
+    28: { title: "Day 28", text: "Day 28" },
+    29: { title: "Day 29", text: "Day 29" },
+    30: { title: "Day 30", text: "Day 30" },
+    31: { title: "Day 31 🎉", text: "Day 31 🎉 300일을 축하해!" }
 };
